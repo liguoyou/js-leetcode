@@ -29,7 +29,7 @@ var isPalindrome = function(x) {
   // 负数, 不是回文数
   if (x < 0) return false
 
-  // 1~10 都是回文数
+  // 1~9 都是回文数
   if (x < 10) return true
 
   //
@@ -43,17 +43,51 @@ var isPalindrome = function(x) {
     }
   }
 
-  // 方式2. 转字符串实现, 反转之后仍然相等, 则是回文数
+  // 方式1 结束
+
+  // 方式2. 转字符串实现, 反转之后两数仍然相等, 则是回文数
   // let newX = +(x + '')
   //   .split('')
   //   .reverse()
-  //   .join('')
-  // if (x !== newX) return false
+  //   .join('');
+  // if (x !== newX) return false;
 
-  //
+  // 方式2 结束
 
-  // 你能不将整数转为字符串来解决这个问题吗？
-  // 暂时不能, 在考虑...
+  // 你能不将整数转为字符串来解决这个问题吗？ 我: ok
+  // 方式 3
+  // 计算数字 x 的位数
+  // let sum = 0;
+  // let xx = x;
+  // while (xx >= 1) {
+  //   xx /= 10;
+  //   sum++;
+  // }
+
+  // 遍历, 取出 首/尾 数字进行对比
+  // for (let i = 0; i < Math.floor(sum / 2); i++) {
+  //   // 作用: 假设 i=2 => (sum-i-1) => 123.45654321 => 123.45654321 => 123, 以此类推
+  //   let leftFloor = Math.floor(x / Math.pow(10, sum - i - 1));
+
+  //   // 作用: 假设 i=2 => (sum-i) => 12.345654321 => 12.345654321 => 120, 以此类推
+  //   let leftFloorInt = Math.floor(x / Math.pow(10, sum - i)) * 10;
+
+  //   // 第 i 位的数字
+  //   let leftVal = leftFloor - leftFloorInt;
+
+  //   // 作用: 假设 i=2 => 指数: 3 => 12345654.321 => 123456543.21 => 123456543, 以此类推
+  //   let rightFloor = parseInt((x / Math.pow(10, i + 1)) * 10);
+
+  //   // 作用: 假设 i=2 => 指数: 3 => 12345654.321 => 12345654 => 123456540, 以此类推
+  //   let rightFloorInt = Math.floor(x / Math.pow(10, i + 1)) * 10;
+
+  //   // 第 sum - i 位的数字
+  //   let rightVal = rightFloor - rightFloorInt;
+
+  //   if (leftVal !== rightVal) return false;
+  // }
+
+  // 方式 3 结束
 
   return true
 }
@@ -61,6 +95,7 @@ var isPalindrome = function(x) {
 console.log(isPalindrome(-100)) // false
 console.log(isPalindrome(0)) // true
 console.log(isPalindrome(7)) // true
+console.log(isPalindrome(10)) // false
 console.log(isPalindrome(11)) // true
 console.log(isPalindrome(23)) // false
 console.log(isPalindrome(535)) // true
