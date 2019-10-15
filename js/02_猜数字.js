@@ -28,36 +28,22 @@
  * @return {number}
  */
 var game = function(guess, answer) {
-  // 判断输入的数据是否合格
-  if (!paramsIllegal(guess)) return 0
-  if (!paramsIllegal(answer)) return 0
-
-  // 循环判断结果
   let result = 0
-  guess.forEach((item, index) => {
-    if (item === answer[index]) {
-      result++
-    }
-  })
+  for (let i = 0; i < guess.length; i++) {
+    if (guess[i] === answer[i]) result++
+  }
+
+  // guess.forEach((item, index) => {
+  //   if (item === answer[index]) result++
+  // })
+
   return result
-}
 
-// 判断参数是否非法
-const paramsIllegal = param => {
-  if (!param) return false
-
-  // 长度必须为 3
-  if (param.length !== 3) return false
-
-  // 数值必须是 1 || 2 || 3
-  let idx = param.findIndex(item => {
-    return item !== 1 && item !== 2 && item !== 3
-  })
-  if (idx > -1) return false
-
-  return true
+  // 一行实现
+  // return guess.filter((item, index) => item === answer[index]).length
 }
 
 // 调用执行
 console.log(game([1, 2, 3], [1, 2, 3])) // 3
 console.log(game([2, 2, 3], [3, 2, 1])) // 1
+console.log(game([2, 2, 3], [3, 1, 1])) // 1
