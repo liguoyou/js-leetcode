@@ -22,6 +22,7 @@
 // answer的元素取值为 {1, 2, 3} 之一。
 
 /**
+ * 猜数字
  * @param {number[]} guess
  * @param {number[]} answer
  * @return {number}
