@@ -22,17 +22,34 @@
  * @param {string} needle
  * @return {number}
  */
+// 看到有人使用 indexOf slice 等内置函数实现, 我觉得不符合题目要求
 var strStr = function(haystack, needle) {
-  if (needle === '') return 0
+  // 如果 参数 needle 为空
+  if (needle === '') return 0;
 
-  if (haystack === '') return -1
+  // 如果参数 needle 存在, haystack 为空
+  if (haystack === '') return -1;
 
-  // 使用这个 slice 函数不合理, 不该这么做
-  // for (let i = 0; i < haystack.length; i++) {
-  //   if (haystack.slice(i, i + needle.length) === needle) {
-  //     return i;
-  //   }
-  // }
+  // 存个长度先
+  let iLens = needle.length;
+  let jLens = haystack.length;
 
-  return -1
-}
+  // 遍历 haystack
+  for (let j = 0; j < jLens; j++) {
+    // 如果 后面剩余的字符位数 <  needle 的字符串长度, 就没必要继续遍历了
+    if (j + iLens > jLens) break;
+
+    // 找到了一个与 needle[0] 相同的字符
+    if (needle[0] === haystack[j]) {
+      // 从该位置开始在 haystack 中截取与 needle字符长度相同的字符串, 做比较
+      let curTarget = haystack[j];
+      for (let i = j + 1; i < j + iLens; i++) {
+        curTarget += haystack[i];
+      }
+
+      if (curTarget === needle) return j;
+    }
+  }
+
+  return -1;
+};
